@@ -24,3 +24,14 @@ git checkout main // 기본 브랜치가 main인 경우
 git checkout -b 브랜치이름
 ex) git checkout -b apply-feedback
 ```
+
+---
+
+#### 구현할 기능
+ - 숫자 입력 
+    - 입력값은 서로다른 임의의 숫자 3개
+ - 입력값 계산
+    - 스트라이크, 볼, 포볼 개수 계산 
+ - 결과값 출력
+    - 1: 게임 새로 시작
+    - 2: 종료
