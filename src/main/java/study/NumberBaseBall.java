@@ -49,6 +49,7 @@ public class NumberBaseBall {
 
         for (Character c : list) {
             listTemp.add(c);
+            System.out.printf("%c", c);
         }
     }
 
@@ -103,5 +104,12 @@ public class NumberBaseBall {
         if (listTemp.contains(c)) {
             ball++;
         }
+    }
+
+    public static void main(String[] args) {
+        InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
+        NumberBaseBall numberBaseBall = new NumberBaseBall(inputView, resultView);
+        numberBaseBall.gameStart();
     }
 }
