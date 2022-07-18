@@ -28,10 +28,10 @@ public class Balls {
     public long compare(Balls user) {
         long count = 0;
 
-        for(int i=0; i<balls.size(); i++) {
+        for (int i = 0; i < balls.size(); i++) {
             BallStatus compare = balls.get(i).compare(user.balls.get(i));
 
-            if(compare == BallStatus.STRIKE) {
+            if (compare == BallStatus.STRIKE) {
                 count++;
             }
         }
@@ -40,14 +40,32 @@ public class Balls {
     }
 
     public long contains(Balls ball) {
-        return balls.stream()
-                .filter(ball1 -> ball.balls.contains(ball1))
-                .count();
+        int count = 0;
+        for (int i = 0; i < ball.balls.size(); i++) {
+            if (contain(ball.balls.get(i))) {
+                count++;
+            }
+        }
+
+        return count;
+//        return balls.stream()
+//                .filter(ball1 -> ball.balls.contains(ball1))
+//                .count();
+    }
+
+    public Boolean contain(Ball ball) {
+        for(int i=0; i<balls.size(); i++) {
+            BallStatus compare = balls.get(i).compare(ball);
+            if(compare == BallStatus.BALL) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public GameResult play(Balls user) {
         long strike = compare(user);
-        long ball = contains(user)-strike;
+        long ball = contains(user);
 
         return new GameResult(strike, ball);
     }
@@ -56,7 +74,7 @@ public class Balls {
         balls = new ArrayList<>();
         int index = 0;
 
-        while(balls.size() < 3) {
+        while (balls.size() < 3) {
             Random random = new Random();
             int i = random.nextInt(9) + 1;
 

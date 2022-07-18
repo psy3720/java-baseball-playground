@@ -2,12 +2,13 @@ package study;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BallTest {
     /*
@@ -82,8 +83,8 @@ public class BallTest {
 
     @Test
     void containsBall() {
-        Balls com = new Balls(Arrays.asList(new Ball(1), new Ball(2), new Ball(3)));
-        Balls user = new Balls(Arrays.asList(new Ball(2), new Ball(4), new Ball(1)));
+        Balls com = new Balls(Arrays.asList(new Ball(0,1), new Ball(1,2), new Ball(2,3)));
+        Balls user = new Balls(Arrays.asList(new Ball(0,2), new Ball(1,4), new Ball(2,1)));
 
         long actual = com.contains(user);
         assertThat(2).isEqualTo(actual);
@@ -92,7 +93,6 @@ public class BallTest {
     @Test
     void result() {
         Balls com = new Balls(Arrays.asList(new Ball(1), new Ball(2), new Ball(3)));
-//        Balls com = new Balls(Arrays.asList(new Ball(1), new Ball(2), new Ball(3)));
         Balls user = new Balls(Arrays.asList(new Ball(5), new Ball(4), new Ball(6)));
 
         GameResult result = com.play(user);
@@ -101,15 +101,20 @@ public class BallTest {
         assertThat(actual).isEqualTo("낫싱");
     }
 
-    @Test
-    void createRandomNumber() {
+//    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"0, true", "1, true", "2, true"})
+    void createRandomNumber(int index, Boolean expected) {
         Balls com = new Balls();
         List<Ball> ball = com.createRandomNumber();
 
-        assertThat(ball.get(0).isNumber()).isTrue();
-        assertThat(ball.get(1).isNumber()).isTrue();
-        assertThat(ball.get(2).isNumber()).isTrue();
+        assertEquals(ball.get(index).isNumber(), expected);
         assertThat(com.balls.size()).isEqualTo(3);
+    }
+
+    public static void main(String[] args) {
+        InputView inputView = new InputView();
+        inputView.input();
     }
 
 

@@ -12,15 +12,15 @@ public class GameResult {
     public String result() {
         String result = "";
 
-        if(ball == 0 && strike == 0) {
+        if(BallStatus.isNothing(strike, ball)) {
             return "낫싱";
         }
 
-        if(ball > 0) {
+        if(BallStatus.isBall(ball)) {
             result += ball + "볼 ";
         }
 
-        if(strike > 0) {
+        if(BallStatus.isStrike(strike)) {
             result += strike + "스트라이크";
         }
 

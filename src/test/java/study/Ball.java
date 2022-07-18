@@ -47,4 +47,12 @@ public class Ball {
 
         return BallStatus.NOTHING;
     }
+
+    @Override
+    public String toString() {
+        return "Ball{" +
+                "index=" + index +
+                ", number=" + number +
+                '}';
+    }
 }
